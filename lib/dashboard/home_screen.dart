@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ntp/ntp.dart';
 import 'package:provider/provider.dart';
-import '../models/coin_converter_model.dart';
 import '../models/general_data_model.dart';
 import '../models/latest_app.dart';
 import '../models/user_stream.dart';
@@ -32,7 +31,6 @@ class _HomeScreenState extends State<HomeScreen>
 
   //Get Latest version info from firebase config
   final RemoteConfig remoteConfig = RemoteConfig.instance;
-  CoinConverterModel coinConvert = CoinConverterModel();
 
   @override
   void didChangeDependencies() {

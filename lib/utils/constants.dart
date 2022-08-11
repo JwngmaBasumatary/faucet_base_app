@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../models/coin_converter_model.dart';
 
 class Constants {
   static List<String> withdrawalServices = [
@@ -13,7 +12,12 @@ class Constants {
 
   static const Color dashboardContainerColor = Color(0xff10263C);
   static const Color dbContainerTitleColor = Colors.white;
-
+  static const blue = Color(0xff287FCD);
+  static const blueDark = Color(0xff154A76);
+  static const blueBg = Color(0xffF4F3F8);
+  static const blueGrey = Color(0xffCBD1D7);
+  static const blueLite = Color(0xffA7E8FE);
+  static const green = Color(0xff35A694);
   //Text required for app
   static const String appName = "Cloud Cardano Faucet";
   static const String appBarTitle = "Cardano Faucet";
@@ -26,8 +30,6 @@ class Constants {
   static const String coingekoNetworkName = "cardano";
   static const String appSource = kReleaseMode ? "Play Store" : "Local Source";
 
-  //For Default Coin Convert Fail
-  static CoinConverterModel coinConvert = CoinConverterModel(inr: 50);
 
   //for dynamic link
   static const String firebaseDynamicUrl = "https://cardanofaucetapp.page.link";

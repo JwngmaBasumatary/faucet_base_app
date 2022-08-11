@@ -14,7 +14,7 @@ class ConfigPage extends StatefulWidget {
   const ConfigPage({Key? key}) : super(key: key);
 
   @override
-  _ConfigPageState createState() => _ConfigPageState();
+  State<ConfigPage> createState() => _ConfigPageState();
 }
 
 class _ConfigPageState extends State<ConfigPage> {

@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:in_app_update/in_app_update.dart';
 import 'package:ntp/ntp.dart';
-import '../models/app_data.dart';
-import '../models/coin_address_model.dart';
 import '../models/country.dart';
 import '../models/general_data_model.dart';
 import '../models/user_basic_model.dart';
@@ -50,18 +48,6 @@ class FirestoreServices {
         .then((documentSnapshot) => documentSnapshot.get('name'));
   }
 
-  //User Address
-  Future<CoinAddressModel> getUserAddress() async {
-    final user = auth.currentUser;
-    return await _db
-        .collection(Constants.appCoinName)
-        .doc(Constants.docAppNumber)
-        .collection(Constants.collUsers)
-        .doc(user!.uid)
-        .get()
-        .then((documentSnapshot) =>
-            CoinAddressModel.fromJson(documentSnapshot.data()!));
-  }
 
   //User Basic Info
   Future<UserBasicModel> getUserBasicInfo() async {
@@ -74,21 +60,6 @@ class FirestoreServices {
         .get()
         .then((documentSnapshot) =>
             UserBasicModel.fromMap(documentSnapshot.data()!));
-  }
-
-  //Top Users
-  Future<List<DocumentSnapshot<Object?>>> getTopUsers() async {
-    List<DocumentSnapshot> _list = [];
-    Query query = _db
-        .collection(Constants.appCoinName)
-        .doc(Constants.docAppNumber)
-        .collection(Constants.collUsers)
-        .orderBy("points", descending: true)
-        .limit(50);
-    QuerySnapshot querySnapshot = await query.get();
-    _list = querySnapshot.docs;
-
-    return _list;
   }
 
   //Refresh User Account
@@ -304,39 +275,6 @@ class FirestoreServices {
     }
   }
 
-  //Get Transaction from Common Collection Withdrawal Request
-  Future<List<DocumentSnapshot>> getTransactionsFromWR() async {
-    final user = auth.currentUser;
-    List<DocumentSnapshot> _list = [];
-    Query query = _db
-        .collection(Constants.appCoinName)
-        .doc(Constants.docAppNumber)
-        .collection(Constants.collUsers)
-        .doc(user?.uid)
-        .collection(Constants.subCollTransactions)
-        .orderBy("time", descending: true);
-    QuerySnapshot querySnapshot = await query.get();
-    _list = querySnapshot.docs;
-
-    return _list;
-  }
-
-  Future<List<DocumentSnapshot>> getPaymentProofs() async {
-    List<DocumentSnapshot> _list = [];
-    Query query = _db
-        .collection(Constants.appCoinName)
-        .doc(Constants.docAppNumber)
-        .collection(Constants.collPaymentProofs)
-        .where("status", isEqualTo: "paid")
-        .orderBy("time", descending: false)
-        .limit(50);
-    QuerySnapshot querySnapshot = await query.get();
-    _list = querySnapshot.docs;
-
-    return _list;
-  }
-
-  /////////////////////////////////////////////////////////////////////
 
   /// Events ///
 
@@ -701,16 +639,16 @@ class FirestoreServices {
 
   //Get Give Away Winners
   Future<List<DocumentSnapshot>> getGiveAwayWinners() async {
-    List<DocumentSnapshot> _list = [];
+    List<DocumentSnapshot> list = [];
     Query query = _db
         .collection(Constants.appCoinName)
         .doc(Constants.docAppNumber)
         .collection(Constants.collWeeklyGiveAwayWinners)
         .orderBy("time", descending: false);
     QuerySnapshot querySnapshot = await query.get();
-    _list = querySnapshot.docs;
+    list = querySnapshot.docs;
 
-    return _list;
+    return list;
   }
 
   /////////////////////////////////////////////////////////////////////
@@ -870,16 +808,6 @@ class FirestoreServices {
     return user!.uid.toString();
   }
 
-  Future<AppData> getAppData() async {
-    final user = auth.currentUser;
-    return await _db
-        .collection(Constants.appCoinName)
-        .doc(Constants.docAppNumber)
-        .collection(Constants.collUsers)
-        .doc(user!.uid)
-        .get()
-        .then((documentSnapshot) => AppData.fromJson(documentSnapshot.data()!));
-  }
 
   Future getToday() async {
     debugPrint("Get Today  is Called");
