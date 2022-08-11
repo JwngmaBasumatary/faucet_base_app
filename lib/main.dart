@@ -32,7 +32,6 @@ Future<void> main() async {
 
   const InitializationSettings initializationSettings =
   InitializationSettings(android: initializationSettingsAndroid);
-
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: (String? payload) async {
         if (payload != null) {

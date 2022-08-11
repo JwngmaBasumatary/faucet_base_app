@@ -1,12 +1,11 @@
 import 'package:faucet_base_app/providers/form_state.dart';
-import 'package:faucet_base_app/screens/login/custom/sign_up.dart';
 import 'package:faucet_base_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/ui/text.dart';
 
-class EmailLogin extends StatelessWidget {
-  const EmailLogin({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +99,7 @@ class EmailLogin extends StatelessWidget {
                           primary: Colors.white,
                         ),
                         child: const DesignText(
-                          'Login',
+                          'Register',
                           color: Constants.blue,
                           fontWeight: FontWeight.bold,
                         ),
@@ -119,13 +118,7 @@ class EmailLogin extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SignUp(),
-                              ));
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                           padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
@@ -141,7 +134,7 @@ class EmailLogin extends StatelessWidget {
                           primary: Colors.white,
                         ),
                         child: const DesignText(
-                          'Register',
+                          'Login',
                           color: Constants.blue,
                           fontWeight: FontWeight.bold,
                         ),
