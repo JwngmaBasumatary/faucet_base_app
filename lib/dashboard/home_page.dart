@@ -444,9 +444,9 @@ class HomeCard2 extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     svgImage,
-                    height: 60,
+                    height: 50,
                   ),
-                  const SizedBox(width: 6),
+                  const SizedBox(width: 12),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
