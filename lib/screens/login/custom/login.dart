@@ -1,3 +1,4 @@
+import 'package:faucet_base_app/screens/login/custom/sign_up.dart';
 import 'package:faucet_base_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,6 +16,7 @@ class LoginPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
               "https://firebasestorage.googleapis.com/v0/b/esports-tournament-app-de5e8.appspot.com/o/temp%2FiconTemp.png?alt=media&token=9d1ab0df-8b6b-4f06-bdc4-972a95b5841c",
@@ -26,7 +28,7 @@ class LoginPage extends StatelessWidget {
               fontSize: 22,
               fontWeight: FontWeight.w700,
             ),
-            const Spacer(),
+            const SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
@@ -66,7 +68,13 @@ class LoginPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUp(),
+                          ));
+                    },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),

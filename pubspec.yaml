@@ -46,7 +46,7 @@ dependencies:
   intl: ^0.17.0
   connectivity_plus: ^2.3.6
   firebase_remote_config: ^0.10.0+2
-  font_awesome_flutter: ^9.0.0
+  font_awesome_flutter: ^10.1.0
   firebase_messaging: ^11.4.1
   firebase_analytics: ^5.0.9
   lottie: ^1.0.1
@@ -64,8 +64,7 @@ dependencies:
   firebase_dynamic_links: ^4.0.4
   bot_toast: ^4.0.1
   share: ^2.0.4
-  shimmer: ^2.0.0
-  flutter_signin_button: ^2.0.0
+  shimmer: ^2.0.0 
   confetti: ^0.7.0
   legacy_progress_dialog: ^0.1.1
   email_validator: ^2.0.1

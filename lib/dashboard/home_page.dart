@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:faucet_base_app/screens/wallet/redeem.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,6 +29,23 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _signOut(BuildContext context) async {
+      ProgressDialog progressDialog = ProgressDialog(
+        context: context,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+      );
+
+      progressDialog.show();
+      var firebaseAuthServices = FirebaseAuthServices();
+
+      try {
+        firebaseAuthServices.signOutWhenGoogle();
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         // toolbarHeight: 100,
@@ -38,7 +56,68 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
-      drawer: const Drawer(),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: const BoxDecoration(
+                color: Constants.dashboardContainerColor,
+              ),
+              accountName: const Text(
+                Constants.appName,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              accountEmail: Text(
+                "Email@gmail.com",
+                // userData.email!.isNotEmpty ? userData.email! : "",
+                style: const TextStyle(fontSize: 15, color: Colors.white),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: ClipOval(
+                  child: Image.network(
+                    // userData.profilePhoto!.isNotEmpty
+                    //     ? userData.profilePhoto!
+                    //     : Constants.appLogoForDynamicLink,
+                    Constants.appLogoForDynamicLink,
+                    fit: BoxFit.cover,
+                    width: 100,
+                    height: 100,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text("Home"),
+              leading: const Icon(FontAwesomeIcons.house),
+              trailing: const Icon(Icons.navigate_next),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const HomePage();
+                }));
+              },
+            ),
+            Divider(
+              height: 1,
+              color: Theme.of(context).primaryColor,
+            ),
+            ListTile(
+              title: const Text("Logout"),
+              leading: const Icon(FontAwesomeIcons.rightFromBracket),
+              trailing: const Icon(Icons.navigate_next),
+              onTap: () {
+                Navigator.of(context).pop();
+                _signOut(context);
+              },
+            ),
+            Divider(
+              height: 1,
+              color: Theme.of(context).primaryColor,
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           Container(
@@ -86,12 +165,18 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Redeem(),
+                                  ));
+                            },
                             style: TextButton.styleFrom(
                               elevation: 0,
                               padding:
                                   const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                              shape:  RoundedRectangleBorder(
+                              shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(6),
                                     bottomRight: Radius.circular(6),
@@ -114,7 +199,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                 HomeCard(
+                HomeCard(
                   svgImage: "assets/svg/refer.svg",
                   descrition:
                       "Invite your friends and femily to get  more coins",
