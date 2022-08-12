@@ -88,8 +88,14 @@ class HomePage extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: const Text("Home"),
-              leading: const Icon(FontAwesomeIcons.house),
+              title: const DesignText(
+                "My Network",
+                color: Constants.blueDark,
+              ),
+              leading: SvgPicture.asset(
+                "assets/svg/network.svg",
+                height: 30,
+              ),
               trailing: const Icon(Icons.navigate_next),
               onTap: () {
                 Navigator.of(context).pop();
@@ -98,22 +104,20 @@ class HomePage extends StatelessWidget {
                 }));
               },
             ),
-            Divider(
-              height: 1,
-              color: Theme.of(context).primaryColor,
-            ),
             ListTile(
-              title: const Text("Logout"),
-              leading: const Icon(FontAwesomeIcons.rightFromBracket),
+              title: const DesignText(
+                "Logout",
+                color: Constants.blueDark,
+              ),
+              leading: SvgPicture.asset(
+                "assets/svg/logout.svg",
+                height: 30,
+              ),
               trailing: const Icon(Icons.navigate_next),
               onTap: () {
                 Navigator.of(context).pop();
                 _signOut(context);
               },
-            ),
-            Divider(
-              height: 1,
-              color: Theme.of(context).primaryColor,
             ),
           ],
         ),
